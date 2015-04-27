@@ -1,0 +1,11 @@
+
+h2 ADD CLASSES
+.row
+	.col-xs-4
+		form('addClassForm' novalidate)
+			.form-group
+				label(for='addClassInput')
+				input.form-control(type='text', name='addClassInput', ng-model='className')
+			.form-group
+				button.btn.btn-success(ng-click='addClass(className)') Add Class
+	.col-xs-8
