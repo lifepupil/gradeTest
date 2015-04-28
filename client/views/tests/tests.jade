@@ -9,3 +9,53 @@ h2 ADD CLASSES
 			.form-group
 				button.btn.btn-success(ng-click='addClass(className)') Add Class
 	.col-xs-8
+
+h3 ADD TESTS GRADES FOR A CLASS
+.row
+	.col-xs-4
+		form('addTestClass' nonvalidate)
+			.form-group
+				label(for='whichClass') Which Class?
+					select.form-control(name='whichClass', ng-model='test.className')
+						option(ng-repeat='name in names') {{name}}
+			.form-group
+				label(for='gradeReceived') Grade?
+				input.form-control(type='number', name='gradeReceived', ng-model='test.grade')
+			.form-group
+				label(for='testDate') Test date?
+				input.form-control(name='testDate', type='date', ng-model='test.date')
+			.form-group
+				label(for='testType') Test type?
+				input.form-control(name='testType', type='text', ng-model='test.type')
+			.form-group
+				button.btn.btn-success(type='submit', ng-click='addTest(test)') Add test
+	.col-xs-2
+	.col-xs-6
+		h3 TEST AVERAGES BY CLASS
+		table.table.table-striped
+			thead
+				tr
+					td Course
+					td Average
+			tbody
+				tr(ng-repeat='(key, value) in afUser.tests')
+					td {{test.className}}
+
+		
+table.table.table-striped(ng-repeat='(key, value) in afUser.tests')
+	thead
+		tr
+			th Edit
+			th Delete
+			th Course
+			th Test Date
+			th Test type
+			th Grade
+	tbody
+		tr(ng-repeat='test in afUser.tests[key]')
+			td: button.btn.btn-success(ng-click='editTest(test)') Edit
+			td: button.btn.btn-danger(ng-click='deleteTest(test, $index)') Delete
+			td {{test.className}}
+			td {{test.date | date: 'medium'}}
+			td {{test.type}}
+			td {{test.grade}}
